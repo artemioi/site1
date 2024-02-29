@@ -19,7 +19,8 @@ def index():
 
 @aap.route('/posts')
 def posts():
-    return render_template('posts.html')
+    posts = Post.query.all()
+    return render_template('posts.html', posts=posts)
 
 
 @aap.route('/about')
@@ -37,7 +38,7 @@ def create():
        try:
            db.session.add(post)
            db.session.commit()
-           return redirect('/')
+           return redirect('/posts')
        except:
            return 'При добавлении статьи произошла ошибка'
 
